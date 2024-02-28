@@ -15,21 +15,7 @@ function NextPrev() {
     const navigator = useNavigate(); 
 
     useEffect(() => {
-        // if (count <2) {
-        //     prev.style.display = 'none';
-        //   }
-        //   else{
-        //       prev.style.display = "block";
-        //   }
-        // if(count==1)
-        // {
-        //     console.log('length'+length)
-        //     next.style.display="block"
-        // } 
-        // else{
-        //     next.style.display="none"
-        // }
-    
+
         listQnas(count)
           .then((response) => {
             setData(response.data);
@@ -59,24 +45,33 @@ function NextPrev() {
 
 
     return (
-        < >View
-    <center>
-      <div style={{width:"1200px"}}>
-    <div id="question" style={{width:"1200px",height:"75px",backgroundColor:"lightblue",borderRadius:"10px"}}>
-       <br/> <b>{data.question}</b>
-    </div>
-    <br/> 
-                <div id="answer" style={{backgroundColor:"#d5f4e6",borderRadius:"10px",width:"1200px"}}>
-            <br/>{data.answer}
+
+      <> 
+        <div id="AllQnas" > 
+
+        <center id="qna_container">      
+        <div style={{width:"1000px"}}>
+          <br/><br/><br/>
+          <div id="question">
+             <b>{data.question}</b>
+          </div>
+          <br/> 
+          <div id="answer"  >
+                  <br/>{data.answer}
+          </div>
+              <div className='hel'>
+                { count>=2 &&
+                  <Button onClick={decrementCount} variant='primary' id="prev">Previous</Button>
+                }
+                { 
+                  <Button onClick={incrementCount} variant='primary' id="next">Next</Button>
+                }
+              </div>
         </div>
-        <div className='hel'>
-            <Button onClick={decrementCount} variant='primary' id="prev">Previous</Button>
-            <Button onClick={incrementCount} variant='primary' id="next">Next</Button>
-        </div>
-    </div>
-      
- </center>
-        </ >
+            
+      </center> 
+        </ div>
+        </>
     
       )
 }

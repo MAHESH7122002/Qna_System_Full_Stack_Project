@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { listTopicQnas } from '../services/QnaServices'
 import { useNavigate, useParams } from 'react-router-dom'
-import'./topic.css';
+import './CssFiles/topic.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Button from 'react-bootstrap/Button';
 
 function Topic_Related_Qnas() 
@@ -17,27 +19,9 @@ function Topic_Related_Qnas()
     
 
     useEffect(() => { 
-        // if (count <1) {
-        //     prev.style.display = 'none';
-        //   }
-        //   else{
-        //       prev.style.display = "block";
-        //   }
+ 
 
-        if((count<length-1) || count==0)
-        {
-            if(count==0)
-            {
         
-            }
-            else{                
-            // next.style.display="block"
-            }
-            console.log('length'+length)
-        }   
-        else{
-            // next.style.display="none"
-        }
 
         listTopicQnas(topic)
           .then((response) => {
@@ -72,36 +56,27 @@ function Topic_Related_Qnas()
         setCount(prevCount => prevCount - 1);        
     }
 
-    //   useEffect(()=>{
-    //     console.log(count)
-    
-    //   },count)
-
   return (
-    <div>Topic_Related_Qnas
-
+    <div id="TopicQnas"> 
         
-       <center>
-      <div style={{width:"1200px"}}>
-        <div id="question" style={{width:"1200px",height:"75px",backgroundColor:"lightblue",borderRadius:"10px"}}>
-          <br/> <b>{topic_data.question}</b>
-       </div>
-
-
-        {/* <h3>Question Id: 
-            {topic_data.qnaId}</h3> */}
-        {/* <div id="question">
-
-          <h2>Question:</h2>
-            {topic_data.question}
-        </div> */}
-        <br/> 
-                <div id="answer" style={{backgroundColor:"#d5f4e6",borderRadius:"10px",width:"1200px"}}>
+       <center id="qna_container">
+        <br/><br/><br/>
+       <div style={{width:"1000px"}}>
+          <div id="question">
+            <br/> <b>{topic_data.question}</b>
+        </div>
+ 
+        <br/>
+                <div id="answer"  >
             <br/>{topic_data.answer}<br/><br/>
         </div>
         <div className='hel' >
-            <Button onClick={decrementCount} variant='primary' id="prev">Previous</Button>
-            <Button onClick={incrementCount} variant='primary' id="next">Next</Button>
+          { count>0 &&
+            <button id="prev" onClick={decrementCount} class="btn btn-primary" >Previous</button>
+          }
+          {( (count==0)|| (count<length-1) )&&
+            <button id="next" onClick={incrementCount} class="btn btn-primary" >Next</button>
+          }
         </div>
         </div>
         </center>
